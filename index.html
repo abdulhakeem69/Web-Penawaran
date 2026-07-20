@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L-TUDO Interior Quotation</title>
+    
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Layout Screen -->
+    <div id="app">
+        <!-- Wrapper Layout -->
+        <div class="app-container">
+        
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="app-sidebar no-print">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <i class="bi bi-house-gear-fill"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="brand-name">L-TUDO</span>
+                        <span class="brand-sub">INTERIOR DESIGN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" id="nav-dashboard" onclick="switchPage('dashboard', event)">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-buat-penawaran" onclick="switchPage('buat-penawaran', event)">
+                            <i class="bi bi-file-earmark-plus-fill"></i>
+                            <span>Buat Penawaran</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-riwayat" onclick="switchPage('riwayat', event)">
+                            <i class="bi bi-clock-history"></i>
+                            <span>Riwayat</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-pengaturan" onclick="switchPage('pengaturan', event)">
+                            <i class="bi bi-sliders2"></i>
+                            <span>Pengaturan</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="bi bi-person-fill-gear"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Admin L-TUDO</span>
+                        <span class="user-role">Estimator & Designer</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="app-main-content">
+            
+            <!-- TOP NAVBAR -->
+            <header class="app-header no-print">
+                <div class="header-left">
+                    <button class="btn-sidebar-toggle d-md-none" onclick="toggleSidebar()">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h1 id="page-title" class="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <span class="current-date" id="header-date">8 Juli 2026</span>
+                    <div class="header-actions">
+                        <button class="btn btn-accent btn-sm rounded-pill px-3 shadow-sm" onclick="switchPage('buat-penawaran'); createNewQuotation();">
+                            <i class="bi bi-plus-lg me-1"></i> Baru
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CONTENT WRAPPER -->
+            <div class="content-body">
+                
+                <!-- ==================== DASHBOARD PAGE ==================== -->
+                <section id="page-dashboard" class="page-section animate-fade-in">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="dashboard-card">
+                                <div class="card-icon text-primary bg-primary-subtle">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-label">Total Penawaran</span>
+                                    <h3 class="card-value" id="dash-total-qty">0</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="dashboard-card">
+                                <div class="card-icon text-success bg-success-subtle">
+                                    <i class="bi bi-cash-stack"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-label">Total Nilai</span>
+                                    <h3 class="card-value text-truncate" id="dash-total-value">Rp 0</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="dashboard-card">
+                                <div class="card-icon text-info bg-info-subtle">
+                                    <i class="bi bi-calendar3"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-label">Bulan Ini</span>
+                                    <h3 class="card-value" id="dash-total-month">0</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="dashboard-card">
+                                <div class="card-icon text-warning bg-warning-subtle">
+                                    <i class="bi bi-calculator"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-label">Rata-rata Penawaran</span>
+                                    <h3 class="card-value text-truncate" id="dash-avg-value">Rp 0</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Left: Recent List -->
+                        <div class="col-lg-8">
+                            <div class="card main-card h-100">
+                                <div class="card-header-custom d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title-custom mb-0"><i class="bi bi-activity me-2 text-primary"></i>Penawaran Terbaru</h5>
+                                    <a href="#" class="view-all-link text-decoration-none small" onclick="switchPage('riwayat', event)">Lihat Semua</a>
+                                </div>
+                                <div class="card-body-custom px-0 py-2">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle custom-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>No. Penawaran</th>
+                                                    <th>Customer</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Total</th>
+                                                    <th class="text-end pe-4">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dash-recent-list">
+                                                <!-- Dynamic content -->
+                                                <tr>
+                                                    <td colspan="5" class="text-center py-4 text-muted">Belum ada penawaran dibuat.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right: Quick actions / status -->
+                        <div class="col-lg-4">
+                            <div class="card main-card mb-4">
+                                <div class="card-header-custom">
+                                    <h5 class="card-title-custom mb-0"><i class="bi bi-lightning-charge-fill me-2 text-warning"></i>Aksi Cepat</h5>
+                                </div>
+                                <div class="card-body-custom text-center py-4">
+                                    <p class="text-muted small">Buat surat penawaran harga interior baru dengan cepat.</p>
+                                    <button class="btn btn-accent w-100 py-2.5 rounded-3 mb-2 shadow-sm" onclick="switchPage('buat-penawaran'); createNewQuotation();">
+                                        <i class="bi bi-file-earmark-plus-fill me-2"></i>Buat Penawaran Baru
+                                    </button>
+                                    <button class="btn btn-outline-secondary w-100 py-2.5 rounded-3" onclick="switchPage('riwayat')">
+                                        <i class="bi bi-clock-history me-2"></i>Riwayat Penawaran
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card main-card">
+                                <div class="card-header-custom">
+                                    <h5 class="card-title-custom mb-0"><i class="bi bi-info-circle-fill me-2 text-info"></i>Profil Perusahaan</h5>
+                                </div>
+                                <div class="card-body-custom">
+                                    <div class="company-preview-card text-center p-3 rounded-3 bg-light">
+                                        <i class="bi bi-buildings text-secondary fs-2 mb-2"></i>
+                                        <h6 class="mb-1" id="dash-company-name">L-TUDO Interior</h6>
+                                        <p class="text-muted small mb-0 text-truncate" id="dash-company-address">Ruko Premium, Blok A No. 10, Jakarta</p>
+                                        <button class="btn btn-link btn-sm mt-2 text-accent p-0 text-decoration-none" onclick="switchPage('pengaturan')">
+                                            Ubah Profil <i class="bi bi-chevron-right small"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== CREATE QUOTATION PAGE ==================== -->
+                <section id="page-buat-penawaran" class="page-section d-none animate-fade-in">
+                    <div class="row g-4">
+                        <!-- Left Panel: Form Input -->
+                        <div class="col-xl-6 form-panel no-print">
+                            
+                            <!-- Customer Details Card -->
+                            <div class="card main-card mb-4">
+                                <div class="card-header-custom d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title-custom mb-0"><i class="bi bi-person-fill text-accent me-2"></i>Informasi Pelanggan</h5>
+                                    <span class="badge bg-secondary-subtle text-secondary py-2 px-3 rounded-pill fw-medium" id="form-quotation-number-badge">-</span>
+                                </div>
+                                <div class="card-body-custom">
+                                    <form id="customer-form" onsubmit="event.preventDefault();">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="cust-name" class="form-label-custom">Nama Customer</label>
+                                                <input type="text" class="form-control form-input-custom" id="cust-name" placeholder="Masukkan nama customer" oninput="updateLivePreview()">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="cust-phone" class="form-label-custom">Nomor HP / WA</label>
+                                                <input type="text" class="form-control form-input-custom" id="cust-phone" placeholder="Contoh: 081234567890" oninput="updateLivePreview()">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="cust-date" class="form-label-custom">Tanggal Penawaran</label>
+                                                <input type="date" class="form-control form-input-custom" id="cust-date" onchange="updateLivePreview()">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="cust-number" class="form-label-custom">Nomor Penawaran</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control form-input-custom" id="cust-number" placeholder="Otomatis" oninput="updateLivePreview()">
+                                                    <button class="btn btn-outline-secondary" type="button" onclick="regenerateQuotationNumber()" title="Generate Ulang">
+                                                        <i class="bi bi-arrow-clockwise"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="cust-address" class="form-label-custom">Alamat Project</label>
+                                                <textarea class="form-control form-input-custom" id="cust-address" rows="2" placeholder="Masukkan alamat lengkap project" oninput="updateLivePreview()"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Sections (Pekerjaan) Area -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="section-heading mb-0 text-secondary"><i class="bi bi-tools text-primary me-2"></i>Rincian Pekerjaan</h4>
+                                <button class="btn btn-accent btn-sm rounded-pill px-3 py-2 shadow-sm" onclick="addSection()">
+                                    <i class="bi bi-folder-plus me-1"></i>Tambah Pekerjaan
+                                </button>
+                            </div>
+
+                            <!-- List of Sections -->
+                            <div id="sections-container" class="mb-4">
+                                <!-- Dynamic Sections will be injected here -->
+                            </div>
+
+                            <!-- NB / Catatan Card -->
+                            <div class="card main-card mb-4">
+                                <div class="card-header-custom d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title-custom mb-0"><i class="bi bi-chat-text-fill text-warning me-2"></i>Catatan (NB)</h5>
+                                    <button class="btn btn-outline-primary btn-xs-custom" onclick="addNoteItem()">
+                                        <i class="bi bi-plus-lg"></i> Tambah Baris
+                                    </button>
+                                </div>
+                                <div class="card-body-custom">
+                                    <div id="notes-container" class="d-flex flex-column gap-2">
+                                        <!-- Dynamic note inputs -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Form Actions -->
+                            <div class="card main-card mb-5">
+                                <div class="card-body-custom d-flex flex-wrap gap-2 justify-content-between">
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-success px-4 py-2.5 rounded-3 fw-semibold shadow-sm" onclick="saveQuotation()">
+                                            <i class="bi bi-floppy-fill me-2"></i>Simpan
+                                        </button>
+                                        <button class="btn btn-primary px-4 py-2.5 rounded-3 fw-semibold shadow-sm" onclick="printQuotation()">
+                                            <i class="bi bi-printer-fill me-2"></i>Cetak / PDF
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-outline-danger px-4 py-2.5 rounded-3 fw-semibold" onclick="resetQuotationForm()">
+                                            <i class="bi bi-arrow-counterclockwise me-2"></i>Reset Form
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right Panel: Preview Area -->
+                        <div class="col-xl-6 preview-panel">
+                            <div class="sticky-preview-container">
+                                <div class="preview-header-bar no-print d-flex justify-content-between align-items-center mb-3">
+                                    <span class="preview-status"><span class="pulse-dot"></span>Live Preview</span>
+                                    <div class="preview-actions">
+                                        <button class="btn btn-outline-secondary btn-sm me-2" onclick="printQuotation()" title="Cetak / Save PDF">
+                                            <i class="bi bi-printer-fill me-1"></i>Cetak
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- The Paper View (Styled like A4) -->
+                                <div class="preview-paper-wrapper">
+                                    <div class="quotation-paper" id="quotation-print-area">
+                                        
+                                        <!-- Header Perusahaan -->
+                                        <div class="paper-header d-flex justify-content-between mb-4">
+                                            <div class="company-logo-area">
+                                                <h2 class="company-name" id="preview-company-name">L-TUDO INTERIOR</h2>
+                                                <p class="company-address d-none" id="preview-company-address">Jl. Merdeka Raya No. 45, Jakarta Selatan</p>
+                                                <p class="company-contact" id="preview-company-contact">Telp: 0812-3456-7890 | Email: ltudo.interior@gmail.com</p>
+                                            </div>
+                                            <div class="quotation-title-area text-end">
+                                                <h3 class="quotation-title">PENAWARAN HARGA</h3>
+                                                <p class="mb-0 text-secondary d-none"><strong>No:</strong> <span id="preview-quote-number">-</span></p>
+                                                <p class="mb-0 text-secondary"><strong>Tanggal:</strong> <span id="preview-quote-date">-</span></p>
+                                            </div>
+                                        </div>
+
+                                        <hr class="header-divider mb-4">
+
+                                        <!-- Customer & Info Meta -->
+                                        <div class="row mb-4">
+                                            <div class="col-7">
+                                                <div class="client-meta">
+                                                    <p class="mb-1 text-muted text-uppercase small font-monospace fw-bold">Kepada Yth:</p>
+                                                    <h5 class="client-name mb-1" id="preview-cust-name">-</h5>
+                                                    <p class="client-address mb-1" id="preview-cust-address">-</p>
+                                                    <p class="client-phone mb-0" id="preview-cust-phone">-</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 text-end">
+                                                <div class="project-meta">
+                                                    <p class="mb-1 text-muted text-uppercase small font-monospace fw-bold">Perihal:</p>
+                                                    <p class="mb-0 fw-semibold text-dark">Pekerjaan Interior Design & Build</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p class="mb-4 small intro-text">Dengan hormat, bersama ini kami sampaikan rincian penawaran harga untuk pekerjaan interior yang diajukan sebagai berikut:</p>
+
+                                        <!-- List of Pekerjaan (Dynamic table) -->
+                                        <div class="preview-items-table mb-4">
+                                            <table class="table table-bordered table-sm quotation-table-print">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 5%;" class="text-center">No</th>
+                                                        <th style="width: 40%;" class="text-center">Uraian Pekerjaan / Item</th>
+                                                        <th style="width: 11%;" class="text-center">Volume</th>
+                                                        <th style="width: 8%;" class="text-center">Qty</th>
+                                                        <th style="width: 18%;" class="text-center">Harga Satuan</th>
+                                                        <th style="width: 18%;" class="text-center">Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="preview-items-body">
+                                                    <!-- Injected dynamically by JS -->
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="grand-total-row">
+                                                        <td colspan="5" class="text-end fw-bold py-2">GRAND TOTAL</td>
+                                                        <td class="text-end fw-bold py-2 text-primary text-nowrap" id="preview-grand-total">Rp 0</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+                                        <!-- Notes (NB) -->
+                                        <div class="preview-notes-section mb-5">
+                                            <h6 class="notes-heading mb-2">CATATAN & KETENTUAN (NB):</h6>
+                                            <ul class="notes-list-print" id="preview-notes-list">
+                                                <!-- Injected dynamically -->
+                                            </ul>
+                                        </div>
+
+                                        <!-- Signatures -->
+                                        <div class="preview-signatures-section mt-5">
+                                            <div class="row justify-content-between">
+                                                <div class="col-5 text-center signature-box d-none">
+                                                    <p class="mb-0">Menyetujui & Menerima,</p>
+                                                    <p class="mb-5 font-monospace small text-muted">(Customer)</p>
+                                                    <div class="sig-line"></div>
+                                                    <h6 class="sig-name" id="preview-sig-customer">-</h6>
+                                                    <p class="sig-title text-muted small">Pelanggan</p>
+                                                </div>
+                                                <div class="col-5 text-center signature-box ms-auto">
+                                                    <p class="mb-0">Hormat Kami,</p>
+                                                    <p class="mb-5 font-monospace small text-muted">L-TUDO Interior</p>
+                                                    <div class="sig-line"></div>
+                                                    <h6 class="sig-name" id="preview-sig-company">L-TUDO Interior Design</h6>
+                                                    <p class="sig-title text-muted small" id="preview-sig-company-title">Estimator</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== HISTORY PAGE ==================== -->
+                <section id="page-riwayat" class="page-section d-none animate-fade-in">
+                    <div class="card main-card">
+                        <div class="card-header-custom d-flex flex-wrap gap-3 justify-content-between align-items-center">
+                            <h5 class="card-title-custom mb-0"><i class="bi bi-clock-history text-primary me-2"></i>Daftar Riwayat Penawaran</h5>
+                            <div class="d-flex gap-2">
+                                <div class="search-box-custom">
+                                    <i class="bi bi-search"></i>
+                                    <input type="text" class="form-control" id="search-history" placeholder="Cari nomor/customer..." oninput="renderHistory()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body-custom px-0 py-2">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No. Penawaran</th>
+                                            <th>Customer</th>
+                                            <th>Tanggal</th>
+                                            <th class="text-end">Total</th>
+                                            <th class="text-center" style="width: 250px;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="history-table-body">
+                                        <!-- Injected dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== SETTINGS PAGE ==================== -->
+                <section id="page-pengaturan" class="page-section d-none animate-fade-in">
+                    <div class="row g-4">
+                        <!-- Left settings -->
+                        <div class="col-lg-6">
+                            <div class="card main-card mb-4">
+                                <div class="card-header-custom">
+                                    <h5 class="card-title-custom mb-0"><i class="bi bi-buildings-fill text-accent me-2"></i>Informasi Perusahaan</h5>
+                                </div>
+                                <div class="card-body-custom">
+                                    <form id="settings-company-form" onsubmit="event.preventDefault();">
+                                        <div class="mb-3">
+                                            <label for="settings-co-name" class="form-label-custom">Nama Perusahaan</label>
+                                            <input type="text" class="form-control form-input-custom" id="settings-co-name" value="L-TUDO INTERIOR">
+                                        </div>
+                                        <div class="mb-3 d-none">
+                                            <label for="settings-co-address" class="form-label-custom">Alamat Perusahaan</label>
+                                            <textarea class="form-control form-input-custom" id="settings-co-address" rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="settings-co-contact" class="form-label-custom">Kontak Perusahaan (Telp & Email)</label>
+                                            <input type="text" class="form-control form-input-custom" id="settings-co-contact" value="Telp: 0812-3456-7890 | Email: ltudo.interior@gmail.com">
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="settings-co-sig-name" class="form-label-custom">Nama Penandatangan</label>
+                                                <input type="text" class="form-control form-input-custom" id="settings-co-sig-name" value="L-TUDO Interior Design">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="settings-co-sig-title" class="form-label-custom">Jabatan</label>
+                                                <input type="text" class="form-control form-input-custom" id="settings-co-sig-title" value="Estimator">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-accent px-4 py-2 rounded-3 shadow-sm" onclick="saveSettings()">
+                                            <i class="bi bi-save me-2"></i>Simpan Pengaturan
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right settings: default items/defaults reset -->
+                        <div class="col-lg-6">
+                            <div class="card main-card mb-4">
+                                <div class="card-header-custom">
+                                    <h5 class="card-title-custom mb-0"><i class="bi bi-sliders2 text-warning me-2"></i>Default & Template</h5>
+                                </div>
+                                <div class="card-body-custom">
+                                    <h6 class="mb-3 font-semibold text-secondary">Catatan Standar (Default NB):</h6>
+                                    <div class="mb-3">
+                                        <textarea class="form-control form-input-custom" id="settings-default-notes" rows="6" placeholder="Masukkan baris default dipisahkan dengan enter..."></textarea>
+                                        <div class="form-text">Masukkan satu ketentuan per baris.</div>
+                                    </div>
+                                    <button type="button" class="btn btn-accent px-4 py-2 rounded-3 shadow-sm" onclick="saveSettings()">
+                                        <i class="bi bi-save me-2"></i>Simpan Default NB
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Database Backup & Restore Card -->
+                            <div class="card main-card mb-4 border-primary-subtle">
+                                <div class="card-header-custom bg-primary-subtle bg-opacity-10">
+                                    <h5 class="card-title-custom text-primary mb-0"><i class="bi bi-database-fill me-2"></i>Manajemen Database</h5>
+                                </div>
+                                <div class="card-body-custom">
+                                    <p class="small text-muted mb-3">
+                                        Data penawaran Anda disimpan secara otomatis di database browser. Gunakan fitur di bawah ini untuk mengekspor (cadangkan) atau mengimpor (pulihkan) seluruh data.
+                                    </p>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <button class="btn btn-outline-primary w-100 py-2 rounded-3 text-nowrap" onclick="exportDatabase()">
+                                                <i class="bi bi-download me-1"></i> Cadangkan (.json)
+                                            </button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-outline-success w-100 py-2 rounded-3 text-nowrap" onclick="triggerImportFile()">
+                                                <i class="bi bi-upload me-1"></i> Pulihkan (.json)
+                                            </button>
+                                            <input type="file" id="database-import-file" class="d-none" accept=".json" onchange="importDatabase(event)">
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 p-2 rounded-3 bg-light d-flex justify-content-between align-items-center">
+                                        <span class="small text-secondary">Status Database:</span>
+                                        <span class="badge bg-secondary rounded-pill" id="db-status-badge">0 Penawaran</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card main-card border-danger-subtle bg-danger-subtle bg-opacity-10">
+                                <div class="card-header-custom">
+                                    <h5 class="card-title-custom text-danger mb-0"><i class="bi bi-exclamation-triangle-fill me-2"></i>Zona Bahaya</h5>
+                                </div>
+                                <div class="card-body-custom">
+                                    <p class="small text-muted">Tindakan berikut akan menghapus semua data penawaran di browser ini secara permanen. Pastikan Anda telah mencadangkan data jika diperlukan.</p>
+                                    <button class="btn btn-danger btn-sm rounded-3 px-3" onclick="clearAllData()">
+                                        <i class="bi bi-trash-fill me-1"></i>Reset Semua Data Aplikasi
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Footer -->
+            <footer class="app-footer-bar no-print text-center text-muted small py-3 mt-auto">
+                <p class="mb-0">&copy; 2026 L-TUDO Interior Quotation App. Built with <i class="bi bi-heart-fill text-danger small"></i> for premium design.</p>
+            </footer>
+
+        </main>
+    </div> <!-- /app-container -->
+    </div> <!-- /Layout Screen (#app) -->
+
+    <!-- Layout Print (Only shown during printing/exporting to PDF) -->
+    <div id="quotation-print"></div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
